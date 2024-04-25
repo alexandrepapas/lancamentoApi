@@ -1,30 +1,33 @@
 package com.alexandrepapas.lancamentoapi.model;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "categoria")
 public class Categoria {
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long codigo;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long codigo;
 
-        private String nome;
-        
-        public Long getCodigo() {
-            return codigo;
-        }
+    @NotNull
+    private String nome;
 
-        public void setCodigo(Long codigo) {
-            this.codigo = codigo;
-        }
+    public Long getCodigo() {
+        return codigo;
+    }
 
-        public String getNome() {
-            return nome;
-        }
+    public void setCodigo(Long codigo) {
+        this.codigo = codigo;
+    }
 
-        public void setNome(String nome) {
-            this.nome = nome;
-        }
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 }

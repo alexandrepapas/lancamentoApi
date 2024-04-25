@@ -11,11 +11,13 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/categorias")
 public class CategoriaController {
+
+
 
     @Autowired
     public CategoriaRepository categoriaRepository;
@@ -27,7 +29,10 @@ public class CategoriaController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Categoria> criarCategoria(@RequestBody Categoria categoria, HttpServletResponse response) {
+    public ResponseEntity<Categoria> criarCategoria( @RequestBody Categoria categoria, HttpServletResponse response) {
+        if(categoria.getNome() == null) {
+            throw new IllegalArgumentException("Nome da categoria não pode ser nulo");
+        }
         Categoria categoriaSalva = categoriaRepository.save(categoria);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{codigo}")
